@@ -8,7 +8,7 @@ a {
     text-decoration: none;
 }
 
-ahover {
+a:hover {
     color: rgb(212, 200, 222);
     text-decoration: underline;
 }
@@ -101,6 +101,11 @@ u {
 
 .project-search {
     width: 25%;
+}
+
+.search-filters {
+    display: block;
+    flex-direction: column;
 }
 
 .project-table {

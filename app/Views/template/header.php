@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <link rel="stylesheet" type="text/css" href="/Project-Display/assets/css/style.css?<?php echo time(); ?>">
-    <script src=/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 </head>
 
 <nav class="logo-header">
     <div class="logo-title">
         <a href="https://www.uq.edu.au/"><img class="logo" src="/Project-Display/writable/uploads/UQ-Logo.png"></a>
-        <a href="/Project-Display/public"><h1>DECO3801 Projects</h1>
+        <a href="/Project-Display/public"><h1>DECO3801 Projects</h1></a>
     </div>
 
     <div>
@@ -24,5 +24,3 @@
         <?php } ?>
     </div>
 </nav>
-<body>
-
