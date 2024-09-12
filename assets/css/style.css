@@ -1,0 +1,123 @@
+html {
+    color: #2b2b2b;
+    font-family: Roboto, sans-serif;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+ahover {
+    color: rgb(212, 200, 222);
+    text-decoration: underline;
+}
+
+body {
+    margin: 0px;
+}
+
+footer {
+    color: white;
+    background-color: #51247a;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+}
+
+u {    
+    border-bottom: 1px dotted;
+    text-decoration: none;
+}
+
+/* Header */
+.logo-header {
+    background-color: #51247a;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 152px;
+    height: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 40px;
+}
+
+.logo-title {
+    color: white;
+    display: flex;
+    padding-left: 16px;
+}
+
+.logo-title h1 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 40px;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/* Footer */
+.footer-container {
+    padding: 30px;
+}
+
+.footer-container h3 {
+    padding-left: 16px;
+}
+
+.footer-list-container {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-list-item {
+    color: rgb(212, 200, 222);
+    text-align: center;
+    padding: 16px;
+}
+
+/* Home page */
+.course-title h1 {
+    color: #51247a;
+    font-size: 20px;
+} 
+
+.home-body {
+    padding-left: 40px;
+    color: #2b2b2b;
+}
+
+.project-container {
+    margin-left: 40px;
+    display: flex;
+}
+
+.project-search {
+    width: 25%;
+}
+
+.project-table {
+    width: 65%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    justify-content: space-evenly;
+}
+
+.project-card {
+    border-radius: 10px;
+    height: 170px;
+    margin-bottom: 30px; 
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid black;
+    background-color: green;
+}
