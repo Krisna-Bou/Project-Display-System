@@ -7,7 +7,7 @@
         <h2>Projects</h2>
         <div class="project-container">
             <div class="project-search"> 
-                
+                <p><?php echo base_url(); ?></p>
                 <h3>Search: __________</h3>
                 <p>Filters:</p>
                 <div class="search-filters">

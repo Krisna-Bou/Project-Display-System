@@ -10,11 +10,11 @@ class User_model extends Model
     protected $primaryKey = 'uid';
     protected $useAutoIncrement = true;
 
-    public function login($username, $password)
+    public function login($email, $password)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->where('username', $username);
+        $builder->where('email', $email);
         $query = $builder->get();
 
         $result = $query->getRowArray();
@@ -22,19 +22,6 @@ class User_model extends Model
             return false;
         }
         if (password_verify($password,$result['password'])) {
-            return true;
-        }
-        return false;
-    }
-
-    public function secrets($email,$a1, $a2)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->where('email', $email);
-        $query = $builder->get();
-        $result = $query->getRowArray();
-        if ($result['s1'] == $a1 && $result['s2'] == $a2) {
             return true;
         }
         return false;
@@ -62,7 +49,7 @@ class User_model extends Model
         return $builder->update($data);
     }
 
-    public function new_user($email, $username, $password,$s1,$s2)
+    public function new_user($email, $username, $password)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
@@ -70,27 +57,14 @@ class User_model extends Model
             'email' => $email,
             'username' => $username,
             'password' => $password,
-            's1' => $s1,
-            's2' => $s2,
         ];
         return $builder->insert($data);
-    }
-
-    public function upload($uid, $filename)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->where('uid',$uid);
-        $file = [
-            'filename' => $filename,
-        ];
-        return $builder->update($file);
     }
 
     public function get_user($username) {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->select('uid,email,filename');
+        $builder->select('uid,email');
         $builder->where('username',$username);
         $query = $builder->get();
         $results = $query->getResultArray();
@@ -100,7 +74,7 @@ class User_model extends Model
     public function get_username($email, $password) {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->select('uid,username,filename');
+        $builder->select('uid,username');
         $builder->where('email',$email);
         $builder->where('password',$password);
         $query = $builder->get();

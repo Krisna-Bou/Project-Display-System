@@ -2,52 +2,6 @@
 namespace App\Controllers;
 
 class Post extends BaseController {
-    public function csse2310(){
-        $model = model('App\Models\Post_model');
-        $data = $model->get_course_posts('CSSE2310');
-        echo view('template/header');
-        $d = [
-            'pid' => $data,
-        ];
-        echo view("template/course_head");
-        echo view('home', $d);
-        echo view('template/footer');
-    }
-
-    public function infs3202(){
-        $model = model('App\Models\Post_model');
-        $data = $model->get_course_posts('INFS3202');
-        echo view('template/header');
-        $d = [
-            'pid' => $data,
-        ];
-        echo view("template/course_head");
-        echo view('home', $d);
-        echo view('template/footer');
-    }
-
-    public function engg4900(){
-        $model = model('App\Models\Post_model');
-        $data = $model->get_course_posts('ENGG4900');
-        echo view('template/header');
-        $d = [
-            'pid' => $data,
-        ];
-        echo view("template/course_head");
-        echo view('home', $d);
-        echo view('template/footer');
-    }
-
-    public function upload_image(){
-        $file = $this->request->getFile('file');
-        $file->move(WRITEPATH . 'uploads');
-        $filename = $file->getName();
-        $model = model('App\Models\Post_model');
-        $session = session();
-        $model->upload($session->get('pid'), $filename);
-    }
-
-
     public function view_post($pid){
         $session = session();
         if (session()->get('username')) { 
@@ -86,32 +40,14 @@ class Post extends BaseController {
         echo view('post', $d);
         echo view('template/footer');
     }
-
-    public function make_comment() {
-        $model = model('App\Models\Comment_model');
+    
+    public function upload_image(){
+        $file = $this->request->getFile('file');
+        $file->move(WRITEPATH . 'uploads');
+        $filename = $file->getName();
+        $model = model('App\Models\Post_model');
         $session = session();
-        $username = $session->get('username');
-        $pid = $session->get('pid');
-        $date = date("Y-m-d");
-        $rbody = $this->request->getPost('comment');
-        $model->new_comment($pid, $date,$username,$rbody);
-        return redirect()->to(base_url('/post/'.$pid));
-    }
-
-    public function favourite() {
-        $model = model('App\Models\Favourite_model');
-        $session = session();
-        $pid = $session->get('pid');
-        $model->favourite($pid);
-        return redirect()->to(base_url('/post/'.$pid));
-    }
-
-    public function unfavourite() {
-        $model = model('App\Models\Favourite_model');
-        $session = session();
-        $pid = $session->get('pid');
-        $model->unfavourite($pid);
-        return redirect()->to(base_url('/post/'.$pid));
+        $model->upload($session->get('pid'), $filename);
     }
 }
 

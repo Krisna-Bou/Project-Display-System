@@ -31,6 +31,17 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('/post/(:num)', 'Post::view_post/$1');
+
+$routes->get('/login', 'Home::index');
+$routes->get('/login/forgot', 'Login::forgot_pass');
+
+$routes->post('/login/check_login', 'Login::check_login');
+$routes->get('/login/logout','Login::logout');
+$routes->get('/register', 'Register::index');
+$routes->post('/register/check_register', 'Register::check_register');
+$routes->post('/login/forgot/check_secret', 'Login::check_secret');
+$routes->get('/account', 'Account::index');
 
 $routes->get('/email', 'Email_Controller::index');
 $routes->post('/email/verify', 'Email_Controller::verify');

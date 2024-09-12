@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/Project-Display/assets/css/style.css?<?php echo time(); ?>">
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
+    <link rel="shortcut icon" type="favicon.ico" href="favicon.ico?">
 </head>
 
 <nav class="logo-header">
