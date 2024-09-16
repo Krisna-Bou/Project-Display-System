@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 class Post extends BaseController {
-    public function view_post($pid){
+    public function view_project($pid){
         $session = session();
         if (session()->get('username')) { 
             $model = model('App\Models\User_model');

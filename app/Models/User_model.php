@@ -16,7 +16,6 @@ class User_model extends Model
         $builder = $db->table('users');
         $builder->where('email', $email);
         $query = $builder->get();
-
         $result = $query->getRowArray();
         if ($result == NULL) {
             return false;
@@ -38,43 +37,33 @@ class User_model extends Model
         return $builder->update($data);
     }
 
-    public function update_email($uid, $email)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->where('uid',$uid);
-        $data = [
-            'email' => $email,
-        ];
-        return $builder->update($data);
-    }
-
-    public function new_user($email, $username, $password)
+    public function new_user($email, $firstname, $lastname, $password)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
         $data = [
             'email' => $email,
-            'username' => $username,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
             'password' => $password,
         ];
         return $builder->insert($data);
     }
 
-    public function get_user($username) {
+    public function get_user($email, $password) {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->select('uid,email');
-        $builder->where('username',$username);
+        $builder->select('uid, email');
+        $builder->where('email',$email);
         $query = $builder->get();
         $results = $query->getResultArray();
         return $results;
     }
 
-    public function get_username($email, $password) {
+    public function get_name($email, $password) {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->select('uid,username');
+        $builder->select('uid, firstname, lastname');
         $builder->where('email',$email);
         $builder->where('password',$password);
         $query = $builder->get();
