@@ -15,12 +15,13 @@
     </div>
 
     <div>
-        <?php if (session()->get('uid')) { ?>
+        <?php if (session()->get('token')) { ?>
             <a class="mx-4" href="<?php echo base_url(); ?>login/logout"> Logout </a>
-            <a class="mx-4" href="<?php echo base_url(); ?>account"> Account </a>
+            <a class="mx-4" href="<?php echo base_url(); ?>profile"> Profile </a>
         <?php } else { ?>
             <a class="mx-4" href="<?php echo base_url(); ?>login"> Login </a>
             <a class="mx-4" href="<?php echo base_url(); ?>register"> Register </a> 
         <?php } ?>
     </div>
 </nav>
+<body>

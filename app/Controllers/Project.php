@@ -1,7 +1,14 @@
 <?php
 namespace App\Controllers;
 
-class Post extends BaseController {
+class Project extends BaseController {
+
+    public function index() {
+        echo view('template/header');
+        echo view('create_project');
+        echo view('template/footer');
+    }
+
     public function view_project($pid){
         $session = session();
         if (session()->get('username')) { 
@@ -16,13 +23,13 @@ class Post extends BaseController {
                 $session->set('fav', false);
             }
         }
-        $model = model('App\Models\Post_model');
+        $model = model('App\Models\Project_model');
 
-        if ($data = $model->get_image($pid)) {
-            $session->set('postpic','/assignment/writable/uploads/'.$data[0]['image']);
-        } else {
-            $session->set('postpic','');
-        }
+        // if ($data = $model->get_image($pid)) {
+        //     $session->set('postpic','/assignment/writable/uploads/'.$data[0]['image']);
+        // } else {
+        //     $session->set('postpic','');
+        // }
 
         $data = $model->get_post($pid);
         $session->set('title', $data[0]['title']);

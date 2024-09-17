@@ -1,5 +1,5 @@
 <title>Home</title>
-<body>
+<div class="site-container">
     <div class="home-body">
         <header class="course-title">
             <h1>Design Computing Studio 3 - Proposal</h1>
@@ -7,7 +7,6 @@
         <h2>Projects</h2>
         <div class="project-container">
             <div class="project-search"> 
-                <p><?php echo base_url(); ?></p>
                 <h3>Search: __________</h3>
                 <p>Filters:</p>
                 <div class="search-filters">
@@ -64,6 +63,7 @@
             </div>
         </div>
     </div>
+</div>
 <script>
     function scroll() {
         $(window).on('beforeunload', function() {
@@ -75,5 +75,3 @@
         }
     }
 </script>
-</body>
-</html>

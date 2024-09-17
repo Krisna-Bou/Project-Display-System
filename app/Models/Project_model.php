@@ -4,36 +4,22 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Post_model extends Model
+class Project_model extends Model
 {
-    protected $table = 'posts';
+    protected $table = 'projects';
     protected $primaryKey = 'pid';
     protected $useAutoIncrement = true;
 
-    public function get_course_posts($cid) {
+    public function get_project_sum($pid) {
         $db = \Config\Database::connect();
-        $posts = $db->table('posts')->where('cid',$cid)->get()->getResultArray();
-        return $posts;
-    }
-
-    public function get_post($pid) {
-        $db = \Config\Database::connect();
-        $post = $db->table('posts')->where('pid',$pid)->get()->getResultArray();
+        $post = $db->table('projects')->select('title, image, bio')->where('pid',$pid)->get()->getResultArray();
         return $post;
     }
 
-
-    public function get_image($pid) {
+    public function get_project($pid) {
         $db = \Config\Database::connect();
-        $post = $db->table('images')->where('pid',$pid)->get()->getResultArray();
+        $post = $db->table('projects')->where('pid',$pid)->get()->getResultArray();
         return $post;
-    }
-
-
-    public function get_replies($pid) {
-        $db = \Config\Database::connect();
-        $replies = $db->table('replies')->where('pid',$pid)->get()->getResultArray();
-        return $replies;
     }
 
     public function upload($pid, $image)
@@ -52,16 +38,21 @@ class Post_model extends Model
         }
     }
 
-    public function new_post($title, $body, $date,$username,$cid)
+    public function new_post($title, $faculty, $field,$active,$start_date, $finish_date, $bio, $uid, $body, $image)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('posts');
         $data = [
             'title' => $title,
+            'faculty' => $faculty,
+            'field' => $field,
+            'active' => $active,
+            'start_date' => $start_date,
+            'finish_date' => $finish_date,
+            'bio' => $bio,
+            'uid' => $uid,
             'body' => $body,
-            'date' => $date,
-            'username' => $username,
-            'cid' => $cid,
+            'image' => $image,
         ];
         return $builder->insert($data);
     }

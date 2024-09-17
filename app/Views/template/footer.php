@@ -1,3 +1,4 @@
+</body>
 <footer>
     <div class="footer-container">
         <h3>Krisna Bou - s4641598 - REIT4841</h3>
@@ -15,5 +16,4 @@
         </div>
     </div>
 </footer>
-</body>
 </html>

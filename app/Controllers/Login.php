@@ -8,16 +8,20 @@ class Login extends BaseController
     public function index()
     {
         // check whether the cookie is set or not, if set redirect to welcome page, if not set, check the session
-        if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+        if (isset($_COOKIE['email']) && isset($_COOKIE['token'])) {
             echo view("home");
         }
         else {
             $session = session();
             $uid = $session->get('uid');
-            $username = $session->get('username');
-            $password = $session->get('password');
-            if ($username && $password) {
+            $email = $session->get('email');
+            $token = $session->get('token');
+            $firstName = $session->get('firstName');
+            $lastName = $session->get('lastName');
+            if ($email && $token) {
+                echo view("template/header");
                 echo view("home");
+                echo view("template/footer");
             } else {
                 $data['error'] = "";
                 echo view("template/header");
@@ -44,19 +48,18 @@ class Login extends BaseController
             # Create a session 
             $session = session();
             $session->set('email', $email);
-            $session->set('password', $password);
-            $data = $model->get_user($username, $password);
-
-
-            
+            $token = md5(uniqid());
+            $session->set('token', $token);
+            $data = $model->set_session($email);
             foreach ($data as $row) {
                 $session->set('uid',$row['uid']);
-                $session->set('email',$row['email']);
+                $session->set('firstName', $row['firstName']);
+                $session->set('lastName', $row['lastName']);
             }
             if ($if_remember) {
                 # Create a cookie
-                setcookie('username', $username, time() + (86400 * 30), "/");
-                setcookie('password', $password, time() + (86400 * 30), "/");
+                setcookie('email', $email, time() + (86400 * 30), "/");
+                setcookie('token', $token, time() + (86400 * 30), "/");
             }
             //echo view('notification');
             return redirect()->to(base_url());
@@ -80,8 +83,8 @@ class Login extends BaseController
         $session = session();
         $session->destroy();
         //destroy the cookie
-        setcookie('username', '', time() - 3600, "/");
-        setcookie('password', '', time() - 3600, "/");
+        setcookie('email', '', time() - 3600, "/");
+        setcookie('token', '', time() - 3600, "/");
         return redirect()->to(base_url('login'));
     }
 }

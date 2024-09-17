@@ -20,7 +20,7 @@ class User_model extends Model
         if ($result == NULL) {
             return false;
         }
-        if (password_verify($password,$result['password'])) {
+        if (password_verify($password, $result['password'])) {
             return true;
         }
         return false;
@@ -37,37 +37,46 @@ class User_model extends Model
         return $builder->update($data);
     }
 
-    public function new_user($email, $firstname, $lastname, $password)
+    public function new_user($email, $firstName, $lastName, $password)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
         $data = [
             'email' => $email,
-            'firstname' => $firstname,
-            'lastname' => $lastname,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
             'password' => $password,
+            'profileImage' => "/Project-Display/writable/uploads/img/default-user.png",
         ];
         return $builder->insert($data);
     }
 
-    public function get_user($email, $password) {
+    public function set_session($email) {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->select('uid, email');
-        $builder->where('email',$email);
-        $query = $builder->get();
-        $results = $query->getResultArray();
+        $builder->select('uid, firstName, lastName');
+        $builder->where('email', $email);
+        $results = $builder->get()->getResultArray();
         return $results;
     }
 
-    public function get_name($email, $password) {
+    public function get_user_profile($uid) {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->select('uid, firstname, lastname');
-        $builder->where('email',$email);
-        $builder->where('password',$password);
-        $query = $builder->get();
-        $results = $query->getResultArray();
+        $builder->select('uid, email, firstName, lastName, title, faculty, position, phone, profileImage');
+        $builder->where('uid', $uid);
+        $results = $builder->get()->getResultArray();
         return $results;
+    }
+
+    public function upload($uid, $profileImage)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->where('uid',$uid);
+        $file = [
+            'profileImage' => $profileImage,
+        ];
+        return $builder->update($file);
     }
 }

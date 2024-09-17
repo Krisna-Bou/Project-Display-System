@@ -42,8 +42,11 @@ $routes->get('/login/logout','Login::logout');
 $routes->get('/register', 'Register::index');
 $routes->post('/register/check_register', 'Register::check_register');
 
+$routes->get('/project/create_project', 'Project::index');
+$routes->post('/project/check_project', 'Project::check_project');
+
 $routes->post('/login/forgot/check_secret', 'Login::check_secret');
-$routes->get('/account', 'Account::index');
+$routes->get('/profile', 'Account::index');
 
 $routes->get('/email', 'Email_Controller::index');
 $routes->post('/email/verify', 'Email_Controller::verify');

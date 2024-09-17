@@ -31,6 +31,11 @@ u {
     text-decoration: none;
 }
 
+.site-container {
+    display: flex;
+    justify-content: center;
+}
+
 /* Header */
 .logo-header {
     background-color: #51247a;
@@ -91,13 +96,20 @@ u {
 } 
 
 .home-body {
-    padding-left: 40px;
     color: #2b2b2b;
+    width: 100%;
+}
+
+.profile-body {
+    color: #2b2b2b;
+    width: 100%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
 
 .project-container {
-    margin-left: 40px;
     display: flex;
+    justify-content: space-between;
 }
 
 .project-search {
@@ -188,3 +200,73 @@ u {
 .submit-btn:hover {
     background-color: #005ea5;
 }
+
+/* Account Profile */
+
+.profile-banner {
+    background-color: #f2f2f2;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: centre;
+}
+
+.profile-banner p{
+    margin: 0;
+    line-height: 24px;
+}
+
+.banner-split {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.profile-name {
+    font-size: 2.438rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-top: 0;
+}
+
+.small-icon {
+    width: 15px;
+    height: 15px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.mail-link {
+    color: #2377cb;
+}
+
+.mail-link:hover {
+    color: #2377cb;
+}
+
+.profile-img {
+    width: 20%;
+    height: auto;
+}
+
+.link {
+    color: #2b2b2b;
+}
+
+@media (min-width: 1000px) {
+    .home-body  {
+        width: 75%;
+    }
+
+    .home-body-banner  {
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+  }

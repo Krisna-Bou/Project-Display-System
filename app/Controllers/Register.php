@@ -20,28 +20,28 @@ class Register extends BaseController
     {
         $error['error'] = "<div class=\"alert alert-danger\" role=\"alert\"> Sorry, the username and email must be unique, and the password must be greater than 8 </div> ";
         $email = $this->request->getPost('email');
-        $firstname = $this->request->getPost('firstname');
-        $lastname = $this->request->getPost('lastname');
+        $firstName = $this->request->getPost('firstName');
+        $lastName = $this->request->getPost('lastName');
         $password = $this->request->getPost('password');
         $new_pass = $this->hash_password($password);
         $model = model('App\Models\User_model');
 
         $validationRules = [
             'firstname' => 'required|alpha_numeric_space',
-            'lastname' => 'required|alpha_numeric_space',
+            'lastName' => 'required|alpha_numeric_space',
             'email' => 'required|is_unique[users.email]',
             'password' => 'required|min_length[8]',
         ];
         if ($this->validate($validationRules)) {
-            $model->new_user($email, $firstname, $lastname, $new_pass);
+            $model->new_user($email, $firstName, $lastName, $new_pass);
             # Create a session 
             $session = session();
-            $session->set('firstname', $firstname);
-            $session->set('lastname', $lastname);
-            $session->set('token', $token);
-            $session->set('password', $new_pass);
+            $session->set('firstName', $firstName);
+            $session->set('lastName', $lastName);
             $session->set('email',$email);
-            $data = $model->get_user($email, $password);
+            $token = md5(uniqid());
+            $session->set('token', $token);
+            $data = $model->get_user($email);
             foreach ($data as $row) {
                 $session->set('uid',$row['uid']);
             }
