@@ -4,20 +4,51 @@ namespace App\Controllers;
 
 class Account extends BaseController
 {
-    public function index()
+    public function view_profile($uid)
     {
+        $db = \Config\Database::connect();
+        $model = model('App\Models\User_model');
+        $data['user'] = $model->get_user_profile($uid);
+        $model = model('App\Models\Project_model');
+        $data['projects'] = $model->get_user_projects($uid);
         echo view("template/header");
-        echo view("account");
+        echo view('template/faculty_head');
+        echo view("profile", $data);
         echo view("template/footer");
     }
 
-    public function update_email(){
-        $session = session();
-        $email = $this->request->getPost('email');
-        $uid = $session->get('uid');
+    public function edit_profile($uid)
+    {
+        $db = \Config\Database::connect();
         $model = model('App\Models\User_model');
-        $model->update_email($uid,$email);
-        return redirect()->to(base_url('/account'));
+        $data['user'] = $model->get_user_profile($uid);
+        echo view("template/header");
+        echo view('template/faculty_head');
+        echo view("edit_profile", $data);
+        echo view("template/footer");
+    }
+
+    public function check_edit($uid)
+    {
+        $db = \Config\Database::connect();
+        $model = model('App\Models\User_model');
+        $data['error'] = "<div class=\"alert alert-danger\" role=\"alert\"> Incorrect username or password!! </div> ";
+        $data['user'] = $model->get_user_profile($uid);
+        $title = $this->request->getPost('title');
+        $position = $this->request->getPost('position');
+        $faculty = $this->request->getPost('faculty');
+        $phone = $this->request->getPost('phone');
+        $bio = $this->request->getPost('bio');
+        $check = $model->update_profile($uid, $title,$position,  $faculty, $phone, $bio);
+        if ($check) {
+            return redirect()->to(base_url().'profile/'.$uid);
+        }
+        else {
+            echo view("template/header");
+            echo view('template/faculty_head');
+            echo view("edit_profile", $data);
+            echo view("template/footer");
+        }
     }
 
     public function upload_file() {

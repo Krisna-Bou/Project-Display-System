@@ -10,16 +10,50 @@ class Project_model extends Model
     protected $primaryKey = 'pid';
     protected $useAutoIncrement = true;
 
-    public function get_project_sum($pid) {
+    public function get_projects() {
         $db = \Config\Database::connect();
-        $post = $db->table('projects')->select('title, image, bio')->where('pid',$pid)->get()->getResultArray();
-        return $post;
+        $data = $db->table('projects')->select('pid, title, image, bio')->get()->getResultArray();
+        return $data;
     }
+
+    public function get_fields(){
+        $db = \Config\Database::connect();
+        $data = $db->table('projects')->select('field')->distinct()->get()->getResultArray();
+        return $data;
+    }
+
+    
+    public function get_search($search, $field, $faculty) { 
+        $db = \Config\Database::connect();
+        $builder = $db->table('projects')->select('pid, title, image, bio');
+    
+        if (!empty($search)) {
+            $builder->like('title', $search);
+        }
+    
+        if ($field != 'x') {
+            $builder->where('field', $field);
+        }
+    
+        if ($faculty != 'x') {
+            $builder->where('faculty', $faculty);
+        }
+    
+        $data = $builder->get()->getResultArray();
+        return $data;
+    }
+    
 
     public function get_project($pid) {
         $db = \Config\Database::connect();
-        $post = $db->table('projects')->where('pid',$pid)->get()->getResultArray();
-        return $post;
+        $data = $db->table('projects')->where('pid',$pid)->get()->getResultArray();
+        return $data;
+    }
+
+    public function get_user_projects($uid) {
+        $db = \Config\Database::connect();
+        $data = $db->table('projects')->where('uid',$uid)->get()->getResultArray();
+        return $data;
     }
 
     public function upload($pid, $image)
@@ -38,15 +72,14 @@ class Project_model extends Model
         }
     }
 
-    public function new_post($title, $faculty, $field,$active,$start_date, $finish_date, $bio, $uid, $body, $image)
+    public function create_project($title, $faculty, $field,$start_date, $finish_date, $bio, $uid, $body, $image)
     {
         $db = \Config\Database::connect();
-        $builder = $db->table('posts');
+        $builder = $db->table('projects');
         $data = [
             'title' => $title,
             'faculty' => $faculty,
             'field' => $field,
-            'active' => $active,
             'start_date' => $start_date,
             'finish_date' => $finish_date,
             'bio' => $bio,
@@ -54,6 +87,9 @@ class Project_model extends Model
             'body' => $body,
             'image' => $image,
         ];
-        return $builder->insert($data);
+        $builder->insert($data);
+        $query = $db->query('SELECT MAX(pid) as pid FROM projects');
+        $results = $query->getResultArray();
+        return $results;
     }
 }

@@ -63,8 +63,17 @@ class User_model extends Model
     public function get_user_profile($uid) {
         $db = \Config\Database::connect();
         $builder = $db->table('users');
-        $builder->select('uid, email, firstName, lastName, title, faculty, position, phone, profileImage');
+        $builder->select('uid, email, firstName, lastName, title, bio,faculty, position, phone, profileImage');
         $builder->where('uid', $uid);
+        $results = $builder->get()->getResultArray();
+        return $results;
+    }
+
+    public function get_user_uid($email) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('uid');
+        $builder->where('email', $email);
         $results = $builder->get()->getResultArray();
         return $results;
     }
@@ -79,4 +88,20 @@ class User_model extends Model
         ];
         return $builder->update($file);
     }
+
+    public function update_profile($uid, $title,$position,$faculty, $phone, $bio)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->where('uid',$uid);
+        $data = [
+            'title' => $title,
+            'bio' => $bio,
+            'faculty' => $faculty,
+            'phone' => $phone,
+            'position' => $position,
+        ];
+        return $builder->update($data);
+    }
+
 }

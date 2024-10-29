@@ -10,7 +10,7 @@
 			<input type="text" class="text-in" placeholder="Email" required="required" name="email">
 			<input type="password" class="text-in" placeholder="Password" required="required" name="password">
 			<button type="submit" class="submit-btn">SUBMIT</button>
-			<label class="float-left form-check-label"><input type="checkbox" name = "remember"> Remember me</label>
+			<label><input type="checkbox" name = "remember"> Remember me</label>
 				<?php echo form_close(); ?>
 		</div>
 	</div>

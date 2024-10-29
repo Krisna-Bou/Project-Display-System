@@ -8,6 +8,7 @@ class Register extends BaseController
     {
         $data['error'] = "";
         echo view('template/header');
+        echo view('template/faculty_head');
         echo view('register', $data);
         echo view('template/footer');
     }
@@ -18,17 +19,16 @@ class Register extends BaseController
 
     public function check_register()
     {
-        $error['error'] = "<div class=\"alert alert-danger\" role=\"alert\"> Sorry, the username and email must be unique, and the password must be greater than 8 </div> ";
+        $error['error'] = "<div class=\"alert alert-danger\" role=\"alert\"> Sorry, there was an error </div> ";
         $email = $this->request->getPost('email');
         $firstName = $this->request->getPost('firstName');
         $lastName = $this->request->getPost('lastName');
         $password = $this->request->getPost('password');
         $new_pass = $this->hash_password($password);
         $model = model('App\Models\User_model');
-
         $validationRules = [
-            'firstname' => 'required|alpha_numeric_space',
-            'lastName' => 'required|alpha_numeric_space',
+            'firstName' => 'required|alpha',
+            'lastName' => 'required|alpha',
             'email' => 'required|is_unique[users.email]',
             'password' => 'required|min_length[8]',
         ];
@@ -41,13 +41,12 @@ class Register extends BaseController
             $session->set('email',$email);
             $token = md5(uniqid());
             $session->set('token', $token);
-            $data = $model->get_user($email);
-            foreach ($data as $row) {
-                $session->set('uid',$row['uid']);
-            }
-            return redirect()->to(base_url());
+            $data = $model->set_session($email);
+            $session->set('uid', $data[0]['uid']);
+            return redirect()->to(base_url().'profile/'.$data[0]['uid']);
         } else {
             echo view('template/header');
+            echo view('template/faculty_head');
             echo view('register', $error);
             echo view('template/footer');
         }

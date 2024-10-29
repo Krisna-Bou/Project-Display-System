@@ -7,6 +7,7 @@ html {
 a {
     color: white;
     text-decoration: none;
+    
 }
 
 a:hover {
@@ -44,6 +45,11 @@ u {
     justify-content: space-between;
 }
 
+.logo-header a{
+    text-decoration: none;
+    color: white;
+}
+
 .logo {
     width: 152px;
     height: auto;
@@ -64,6 +70,68 @@ u {
     padding-left: 40px;
     font-size: 16px;
     font-weight: normal;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    flex-direction: column;
+    padding-left: 20%;
+    padding-right: 20%;
+    border-bottom: solid 1px #d6d6d6;
+}
+
+.title h1 {
+    color: #51247a;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    margin-top: 16px;
+    text-decoration: none;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.title p {
+    color: #51247a;
+    font-size: 16px;
+    margin: 0;
+    margin: 16px;
+    margin-bottom: 5px;
+}
+
+.title a {
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 100;
+    text-decoration: none;
+}
+
+.title-link {
+    width: fit-content;
+}
+
+.title a:after {
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    background: #51247a;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+  
+.title a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+.nav-pro-bono {
+    display: flex;
+    flex-direction: row;
 }
 
 /* Footer */
@@ -100,6 +168,12 @@ u {
     width: 100%;
 }
 
+.home-body-banner h3{
+    text-decoration: none;
+    color: black;
+}
+
+
 .profile-body {
     color: #2b2b2b;
     width: 100%;
@@ -116,9 +190,48 @@ u {
     width: 25%;
 }
 
+.project-search h3{
+    margin-bottom: 0;
+}
+
+.project-row {
+    color: black;
+    border: solid black 1px;
+    margin: 20px;
+    border-radius: 14px;
+    margin-left: 0;
+}
+
+.project-row p, .project-row h3 {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+
+
+.project-row-table {
+    width: 80%;
+    margin: 0 10%;
+}
+
+.project-row-table a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.projects-title {
+    margin: 0 10%;
+}
+
 .search-filters {
     display: block;
     flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.search-filters ul{
+    padding-left: 0;
+    margin-top: 0;
 }
 
 .project-table {
@@ -126,18 +239,64 @@ u {
     height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
     justify-content: space-evenly;
+}
+
+.project-table a {
+    text-decoration: none;
+    height: 60vh;
 }
 
 .project-card {
     border-radius: 10px;
-    height: 170px;
-    margin-bottom: 30px; 
+    height: 80%;
+    width: 100%;
     margin-left: 10px;
     margin-right: 10px;
-    border: 1px solid black;
-    background-color: green;
+    /* border: 1px solid black; */
+    color: black;
+}
+
+.project-card h3 {
+    text-align: center;
+    margin: 3px 0px;
+}
+
+.project-card p {
+    margin: 3px 0px;
+}
+
+.bio {
+    width: 60%;
+}
+
+.material-projects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.material-projects h4{
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+.material-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.material-table a{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+.material-table h4{
+    font-weight: 500;
 }
 
 /* Register */
@@ -259,9 +418,84 @@ u {
     color: #2b2b2b;
 }
 
+.img-small {
+    object-fit:fill;
+    width: 98%;
+    height: 60%;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+
+.login-links {
+    display: flex;
+    align-items: center;
+}
+
+.links {
+    padding-right: 30px;
+}
+
+.account-link {
+    border: none;
+    border-radius: 10px;
+    background-color: #2377cb;
+    padding: 15px;
+    margin-left: 20px;
+}
+
+.account-link:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.link-container {
+    display:flex;
+    padding: 1% 10%;
+    justify-content: end;
+}
+
+.link-container-submit {
+    display:flex;
+    padding: 1% 10%;
+    width: 100%;
+    justify-content: end;
+}
+
+.link-container-submit button {
+    width: 15%; 
+    margin-right: 20%;
+}
+
+.input-box {
+    display:flex;
+}
+
+.input-box-long {
+    display: flex;
+    width: 100%;
+}
+
+.search-buttons {
+    width: 60%;
+    padding-left: 20%;
+}
+
+.search-buttons button {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.search-input {
+    font-size: 16px;
+}
+
+.search-container h3{
+    margin-bottom: 0;
+}
+
 @media (min-width: 1000px) {
     .home-body  {
-        width: 75%;
+        width: 85%;
     }
 
     .home-body-banner  {

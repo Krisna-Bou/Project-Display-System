@@ -30,8 +30,11 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->post('/search', 'Home::search');
 
-$routes->get('/project/(:num)', 'Post::view_post/$1');
+$routes->get('/project/(:num)', 'Project::view_project/$1');
+
+$routes->get('/material/(:num)', 'Material::get_material/$1');
 
 $routes->get('/login', 'Login::index');
 $routes->get('/login/forgot', 'Login::forgot_pass');
@@ -43,10 +46,13 @@ $routes->get('/register', 'Register::index');
 $routes->post('/register/check_register', 'Register::check_register');
 
 $routes->get('/project/create_project', 'Project::index');
-$routes->post('/project/check_project', 'Project::check_project');
+$routes->post('/project/create_project/check_project', 'Project::create_project');
 
 $routes->post('/login/forgot/check_secret', 'Login::check_secret');
-$routes->get('/profile', 'Account::index');
+$routes->get('/profile/(:num)', 'Account::view_profile/$1');
+
+$routes->get('/profile/(:num)/edit', 'Account::edit_profile/$1');
+$routes->post('/profile/(:num)/edit/check_edit', 'Account::check_edit/$1');
 
 $routes->get('/email', 'Email_Controller::index');
 $routes->post('/email/verify', 'Email_Controller::verify');

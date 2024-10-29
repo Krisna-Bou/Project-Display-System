@@ -14,13 +14,14 @@
         <a href="<?php echo base_url(); ?>"><h1>DECO3801 Projects</h1></a>
     </div>
 
-    <div>
-        <?php if (session()->get('token')) { ?>
-            <a class="mx-4" href="<?php echo base_url(); ?>login/logout"> Logout </a>
-            <a class="mx-4" href="<?php echo base_url(); ?>profile"> Profile </a>
+    <div class="login-links">
+        <?php $session = session();?>
+        <?php if ($session->get('uid')) { ?>
+            <a class="links" href="<?php echo base_url(); ?>login/logout"> Logout </a>
+            <a class="links" href="<?php echo base_url(); ?>profile/<?php $session = session(); echo $session->get('uid'); ?>"> Profile </a>
         <?php } else { ?>
-            <a class="mx-4" href="<?php echo base_url(); ?>login"> Login </a>
-            <a class="mx-4" href="<?php echo base_url(); ?>register"> Register </a> 
+            <a class="links" href="<?php echo base_url(); ?>login"> Login </a>
+            <a class="links" href="<?php echo base_url(); ?>register"> Register </a> 
         <?php } ?>
     </div>
 </nav>

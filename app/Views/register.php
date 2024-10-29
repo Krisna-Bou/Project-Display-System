@@ -8,8 +8,8 @@
 				<?php echo $error; ?>
 			</div>
 			<input type="text" class="text-in" placeholder="Email" required="required" name="email">
-			<input type="text" class="text-in" placeholder="First Name" required="required" name="firstname">
-			<input type="text" class="text-in" placeholder="Last Name" required="required" name="lastname">
+			<input type="text" class="text-in" placeholder="First Name" required="required" name="firstName">
+			<input type="text" class="text-in" placeholder="Last Name" required="required" name="lastName">
 			<input type="password" class="text-in" placeholder="Password" required="required" name="password">
 			<button type="submit" class="submit-btn">SUBMIT</button>
 				<?php echo form_close(); ?>
